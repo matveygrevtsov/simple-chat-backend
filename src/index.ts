@@ -1,4 +1,11 @@
-import dotenv from "dotenv";
-dotenv.config({ path: `${__dirname}/.env` });
+import { PORT } from "./constants";
+import express from "express";
+const app = express();
 
-console.log(`Message: ${process.env.MESSAGE}`);
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
+
+app.listen(PORT, () =>
+  console.log(`Сервер успешно стартовал на порту ${PORT}`)
+);
