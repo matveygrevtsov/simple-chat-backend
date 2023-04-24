@@ -28,8 +28,6 @@ class DbUserController {
 
   /**
    * Возвращает массив всех юзеров.
-   *
-   * @param userCredentials Данные юзера.
    */
   public async findAll() {
     const users = await dbModels.user.findAll();
