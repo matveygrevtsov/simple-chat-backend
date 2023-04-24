@@ -1,11 +1,6 @@
 import { PORT } from "./constants";
-import express from "express";
-const app = express();
+import { server } from "./server";
 
-app.listen(PORT, () =>
+server.listen(PORT, () =>
   console.log(`Сервер успешно стартовал на порту ${PORT}`)
 );
-
-app.get("/", (req, res) => {
-  res.send("Hello, world!!");
-});
