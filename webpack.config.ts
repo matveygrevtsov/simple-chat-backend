@@ -18,7 +18,7 @@ const config: Configuration = {
   },
   plugins: [
     new Dotenv({
-      path: "./src/.env",
+      path: "./src/constants/.env",
     }),
   ],
 };

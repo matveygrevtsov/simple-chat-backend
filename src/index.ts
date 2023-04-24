@@ -1,5 +1,5 @@
 import { db } from "./db/db";
-import { PORT } from "./constants";
+import { PORT } from "./constants/constants";
 import { server } from "./server";
 
 const start = async () => {
