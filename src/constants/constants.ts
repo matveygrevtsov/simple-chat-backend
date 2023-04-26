@@ -1,26 +1,39 @@
 import dotenv from "dotenv";
-dotenv.config({ path: `${__dirname}/.env` });
+dotenv.config({ path: `${__dirname}/.env_dev` });
 
-export const IS_PROD: boolean = process.env.NODE_ENV === "production";
+const {
+  NODE_ENV,
+  APP_PORT,
+  DEV_APP_PORT,
+  JWT_SECRET,
+  DEV_JWT_SECRET,
+  JWT_EXPIRES_IN_MS,
+  DEV_JWT_EXPIRES_IN_MS,
+  DB_CONNECTION_STRING,
+  DEV_DB_CONNECTION_STRING,
+  IS_APP_LAUNCHED_FROM_DOCKER_CONTAINER,
+  DEV_DB_CONNECTION_DOCKER_STRING,
+  PASSWORD_HASH_ROUNDS,
+  DEV_PASSWORD_HASH_ROUNDS,
+} = process.env;
 
-export const PORT: number = parseInt(
-  IS_PROD ? process.env.APP_PORT : process.env.DEV_APP_PORT
+export const appPort: number = parseInt(APP_PORT || DEV_APP_PORT);
+
+export const jwtSecret = JWT_SECRET || DEV_JWT_SECRET;
+
+export const jwtExpiresInMs: number = parseInt(
+  JWT_EXPIRES_IN_MS || DEV_JWT_EXPIRES_IN_MS
 );
 
-export const JWT_SECRET = IS_PROD
-  ? process.env.JWT_SECRET
-  : process.env.DEV_JWT_SECRET;
+const getDbConnectionString = () => {
+  if (IS_APP_LAUNCHED_FROM_DOCKER_CONTAINER === "true" && NODE_ENV === "dev") {
+    return DEV_DB_CONNECTION_DOCKER_STRING;
+  }
+  return DB_CONNECTION_STRING || DEV_DB_CONNECTION_STRING;
+};
 
-export const JWT_EXPIRES_IN_MS: number = parseInt(
-  IS_PROD ? process.env.JWT_EXPIRES_IN_MS : process.env.DEV_JWT_EXPIRES_IN_MS
-);
+export const dbConnectionString = getDbConnectionString();
 
-export const DB_CONNECTION_STRING = IS_PROD
-  ? process.env.DB_CONNECTION_STRING
-  : process.env.DEV_DB_CONNECTION_STRING;
-
-export const PASSWORD_HASH_ROUNDS = parseInt(
-  IS_PROD
-    ? process.env.DB_CONNECTION_STRING
-    : process.env.DEV_DB_CONNECTION_STRING
+export const passwordHashRounds = parseInt(
+  PASSWORD_HASH_ROUNDS || DEV_PASSWORD_HASH_ROUNDS
 );

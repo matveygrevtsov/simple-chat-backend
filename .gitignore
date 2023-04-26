@@ -4,3 +4,6 @@
 # production
 /build
 /dist
+
+#env
+.env_prod
