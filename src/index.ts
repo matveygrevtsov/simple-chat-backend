@@ -1,5 +1,5 @@
 import { db } from "./db/db";
-import { appPort } from "./constants/constants";
+import { appPort, dbConnectionString } from "./constants/constants";
 import { server } from "./server";
 
 const start = async () => {
@@ -11,7 +11,7 @@ const start = async () => {
     );
   } catch (error) {
     console.log(
-      `Не удалось запустить сервер на порту (APP_PORT=${appPort}): ${error}`
+      `Не удалось запустить сервер (APP_PORT=${appPort}, dbConnectionString=${dbConnectionString}): ${error}`
     );
   }
 };
