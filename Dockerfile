@@ -1,14 +1,18 @@
 FROM node
 
+# Даём название главной папке
 WORKDIR /app
 
+# Определяем переменные окружения
 ENV IS_APP_LAUNCHED_FROM_DOCKER_CONTAINER true
 
-COPY ./dist . 
+# Копируем код (без typescript) в главную папку
+COPY ./dist .  
+# Копируем package.json (файл, в котором содержится список зависимостей) в главную папку
 COPY ./package.json .
 
+# Запускаем yarn, игнорируя devDependencies
 RUN yarn install --prod
 
-# Есть команда "EXPOSE 3000" - она не является обязательной, но может пригодится для того, чтобы запустить приложение на указанном порту
-
+# Запускаем главный файл
 CMD ["node", "index.js"]

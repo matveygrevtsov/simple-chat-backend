@@ -23,12 +23,13 @@
   "scripts": {
     "install-husky": "husky install",
     "dev": "nodemon",
-    "build": "rimraf ./dist && tsc && cpx ./src/constants/.env_dev ./dist/constants/",
+    "build": "rimraf ./dist && tsc", 
     "run-build": "yarn build && node ./dist/index.js",
     "format": "yarn prettier --write ./src",
     "docker-build-image": "yarn build && docker build -t matvey1999/simple-chat:v1 .",
-    "docker-run-container": "docker login && docker run --rm --env-file ./src/constants/.env_dev --name test-container matvey1999/simple-chat:v1",
-    "docker": "yarn docker-build-image && yarn docker-run-container"
+    "docker-run-container": "docker login && docker run --rm --env-file ./src/constants/.env_prod --name test-container matvey1999/simple-chat:v1",
+    "docker": "yarn docker-build-image && yarn docker-run-container",
+    "docker-compose-run": "docker compose --env-file ./src/constants/.env up --build"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
