@@ -9,27 +9,21 @@
     "@types/sequelize": "^4.28.14",
     "@types/ws": "^8.5.4",
     "cpx": "^1.5.0",
-    "dotenv-webpack": "^8.0.1",
     "husky": "^8.0.3",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "rimraf": "^5.0.0",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4",
-    "webpack": "^5.78.0",
-    "webpack-cli": "^5.0.1"
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "install-husky": "husky install",
     "dev": "nodemon",
-    "build": "rimraf ./dist && tsc", 
-    "run-build": "yarn build && node ./dist/index.js",
+    "build": "rimraf ./build && tsc && cpx ./.env.dev ./build", 
     "format": "yarn prettier --write ./src",
     "docker-build-image": "yarn build && docker build -t matvey1999/simple-chat:v1 .",
-    "docker-run-container": "docker login && docker run --rm --env-file ./src/constants/.env_prod --name test-container matvey1999/simple-chat:v1",
-    "docker": "yarn docker-build-image && yarn docker-run-container",
-    "docker-compose-run": "docker compose --env-file ./src/constants/.env up --build"
+    "docker-compose-run-dev": "docker-compose up --build"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

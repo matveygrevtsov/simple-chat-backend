@@ -7,5 +7,5 @@ server.use(express.json()); // Чтобы наше приложение могл
 server.use("/api", router);
 
 server.get("/", (req, res) => {
-  res.send("Hello, world!!");
+  res.send("Hello, world!");
 });
