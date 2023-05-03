@@ -1,15 +1,27 @@
-FROM node
+FROM node:18 as prepare
 
-# Даём название главной папке
-WORKDIR /simple-chat-backend
+WORKDIR /app
 
-# Копируем код (без typescript) в главную папку
-COPY ./build .  
-# Копируем package.json (файл, в котором содержится список зависимостей) в главную папку
-COPY ./package.json .
+COPY package.json  ./
+COPY yarn.lock ./ 
 
-# Запускаем yarn, игнорируя devDependencies
-RUN yarn install --prod
+RUN yarn install --ignore-scripts
 
-# Запускаем главный файл
-CMD ["node", "index.js"]
+COPY . .
+
+RUN yarn build
+
+FROM node:18 as build
+
+WORKDIR /app
+
+COPY --from=prepare /app/package.json ./
+COPY --from=prepare /app/yarn.lock ./
+
+RUN yarn install --production --ignore-scripts
+
+COPY --from=prepare /app/build ./build
+
+EXPOSE 3000
+
+CMD ["node", "build/index.js"]
