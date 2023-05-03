@@ -2,4 +2,9 @@ version: "3.8"
 
 services:
   app:
+    restart: always
     image: matvey1999/simple-chat:v1
+    env_file:
+      - ./.env.dev
+    ports:
+      - 3000:3000
