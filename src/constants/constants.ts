@@ -7,6 +7,11 @@ const {
   DEV_JWT_SECRET,
   DEV_JWT_EXPIRES_IN_MS,
   DEV_PASSWORD_HASH_ROUNDS,
+  DEV_DB_USER,
+  DEV_DB_PASSWORD,
+  DEV_DB_NAME,
+  DEV_DB_PORT,
+  DEV_DB_HOST,
 } = process.env;
 
 // Достаём значения env-переменных из process
@@ -27,3 +32,9 @@ export const jwtExpiresInMs = parseInt(
 export const passwordHashRounds = parseInt(
   isProd ? PASSWORD_HASH_ROUNDS : DEV_PASSWORD_HASH_ROUNDS
 );
+
+export const dbUser = DEV_DB_USER;
+export const dbPassword = DEV_DB_PASSWORD;
+export const dbName = DEV_DB_NAME;
+export const dbPort = parseInt(DEV_DB_PORT);
+export const dbHost = DEV_DB_HOST;
