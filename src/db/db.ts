@@ -5,12 +5,10 @@ import {
   dbPort,
   dbUser,
 } from "../constants/constants";
-import { Client } from "pg";
+import { Sequelize } from "sequelize";
 
-export const db = new Client({
-  user: dbUser,
-  password: dbPassword,
+export const db = new Sequelize(dbName, dbUser, dbPassword, {
+  dialect: "postgres",
   host: dbHost,
-  database: dbName,
   port: dbPort,
 });
