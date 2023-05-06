@@ -4,7 +4,8 @@ import { server } from "./server";
 
 const start = async () => {
   try {
-    await db.connect();
+    await db.authenticate();
+    await db.sync();
     server.listen(appPort, () =>
       console.log(`Сервер успешно стартовал на порту ${appPort}!`)
     );

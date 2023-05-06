@@ -1,6 +1,10 @@
-import bcrypt from "bcrypt";
-import { passwordHashRounds } from "../constants/constants";
+export function hashPassword(password: string): string {
+  return password;
+}
 
-export function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, passwordHashRounds);
+export function comparePasswords(
+  hashedPassword: string,
+  password: string
+): boolean {
+  return hashedPassword === password;
 }
