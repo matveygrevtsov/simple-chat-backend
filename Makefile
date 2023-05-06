@@ -25,4 +25,3 @@ start_prod:
 	make down_prod
 	make build_prod
 	make up_prod
-
