@@ -26,7 +26,7 @@ class UserRouterController {
     }
     const hashedPassword = await hashPassword(password);
     const user = await dataBaseUserController.create(email, hashedPassword);
-    const token = generateJwt(user.id, user.email);
+    const token = generateJwt({ id: user.id, email: user.email });
     return res.json(token);
   }
 
@@ -49,7 +49,7 @@ class UserRouterController {
         errorCode: FrontendErrors.AccessDenied,
       });
     }
-    const token = generateJwt(user.id, user.email);
+    const token = generateJwt({ id: user.id, email: user.email });
     return res.json(token);
   }
 
