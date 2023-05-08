@@ -1,6 +1,27 @@
-import { db } from "./db/db";
 import { appPort } from "./constants/constants";
-import { server } from "./server";
+import { router } from "./router/rootRouter";
+import { WebSocket } from "ws";
+import express from "express";
+import http from "node:http";
+import { db } from "./db/db";
+import cors from "cors";
+import { handleConnection } from "./wss/handleConnection";
+
+const app = express();
+
+app.use(cors());
+app.use(express.json()); // Чтобы наше приложение могло парсить JSON-формат.
+app.use("/api", router);
+
+app.get("/", (req, res) => {
+  res.send("Hello, world!");
+});
+
+const server = http.createServer(app);
+
+const wss = new WebSocket.Server({ server });
+
+wss.on("connection", handleConnection);
 
 const start = async () => {
   try {
