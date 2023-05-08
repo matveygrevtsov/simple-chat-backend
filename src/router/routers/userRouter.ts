@@ -5,3 +5,4 @@ export const userRouter = express.Router();
 
 userRouter.post("/sign-up", userRouterController.registration);
 userRouter.post("/sign-in", userRouterController.login);
+userRouter.get("/", userRouterController.getAll);

@@ -53,8 +53,10 @@ class UserRouterController {
     return res.json(token);
   }
 
-  public async getAll(_: Request, res: Response) {
-    const users = await dataBaseUserController.findAll();
+  public async getAll(req: Request, res: Response) {
+    const users = (await dataBaseUserController.findAll()).map(
+      ({ id, email }) => ({ id, email })
+    );
     return res.json(users);
   }
 }
