@@ -9,6 +9,7 @@ interface MessageInDataBase {
 class DataBaseMessageController {
   /**
    * Создаёт новое сообщение.
+   * @param userId Айдишник автора сообщения.
    * @param dialogueId Айдишник диалога.
    * @param text текст сообщения.
    */
