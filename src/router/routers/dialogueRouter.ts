@@ -4,3 +4,4 @@ import { dialogueRouterController } from "../controllers/dialogueRouterControlle
 export const dialogueRouter = express.Router();
 
 dialogueRouter.post("/create", dialogueRouterController.create);
+dialogueRouter.get("/", dialogueRouterController.getDialoguesByUserId);
