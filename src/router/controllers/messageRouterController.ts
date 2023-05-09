@@ -5,9 +5,21 @@ class MessageRouterController {
   constructor() {}
 
   public async create(req: Request, res: Response) {
-    const { text, dialogueId } = req.body;
-    const message = await dataBaseMessageController.create(text, dialogueId);
+    const { text, dialogueId, userId } = req.body;
+    const message = await dataBaseMessageController.create(
+      userId,
+      dialogueId,
+      text
+    );
     return res.json(message);
+  }
+
+  public async getMessagesByDialogueId(req: Request, res: Response) {
+    const { dialogueId } = req.body;
+    const messages = await dataBaseMessageController.getMessagesFromDialog(
+      dialogueId
+    );
+    return res.json(messages);
   }
 }
 

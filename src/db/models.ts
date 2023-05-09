@@ -20,6 +20,9 @@ const userDialogue = db.define("userDialogue", {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 });
 
+user.hasMany(message);
+message.belongsTo(user);
+
 dialogue.hasMany(message);
 message.belongsTo(dialogue);
 

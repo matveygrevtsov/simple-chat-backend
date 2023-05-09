@@ -6,11 +6,23 @@ class DialogueRouterController {
 
   public async create(req: Request, res: Response) {
     const { firstUserId, secondUserId } = req.body;
-    const message = await dataBaseDialogueController.create(
-      firstUserId,
-      secondUserId
+    try {
+      const message = await dataBaseDialogueController.create(
+        firstUserId,
+        secondUserId
+      );
+      return res.json(message);
+    } catch (error) {
+      return res.json(error);
+    }
+  }
+
+  public async getDialoguesByUserId(req: Request, res: Response) {
+    const { userId } = req.body;
+    const dialogues = await dataBaseDialogueController.getDialogsByUserId(
+      userId
     );
-    return res.json(message);
+    return res.json(dialogues);
   }
 }
 
